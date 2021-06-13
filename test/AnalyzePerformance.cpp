@@ -12,12 +12,14 @@ void TestBodyRvalue() {
     auto query = Enumerable<int>::Repeat(1, 10000)
         .SelectWithIndex([] (int x, int i) { return x * i; })
         .Select([] (int x) { return x * x; });
+    query.begin();
 }
 
 void TestBodyLvalue() {
     auto query1 = Enumerable<int>::Repeat(1, 10000);
     auto query2 = query1.SelectWithIndex([] (int x, int i) { return x * i; });
     auto query3 = query2.Select([] (int x) { return x * x; });
+    query3.begin();
 }
 
 void TestBodyStl1() {
